@@ -1,12 +1,11 @@
 <template>
-  <div>
-    This is Home page!
+  <div class="inline-flex">
+    loggin
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'Home',
+  name: 'Logged',
 };
 </script>
