@@ -4,7 +4,7 @@
       <router-link to="/">
         <img alt="codersX-logo" src="@/assets/logo.png" class="h-6" />
       </router-link>
-      <div class="flex-grow text-right">
+      <div class="flex-grow text-right h-full">
         <logged v-if="isLoggin" />
         <unlog v-else />
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Nav />
-    <div class="container mx-auto flex-grow py-4 flex items-center ">
+    <div class="container mx-auto flex-grow py-4 flex items-center">
       <router-view />
     </div>
   </div>
