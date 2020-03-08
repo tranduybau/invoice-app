@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-      <Nav>asd</Nav>
-    <router-view/>
+    <Nav />
+    <div class="container mx-auto flex-grow py-4 flex items-center ">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -15,3 +17,13 @@ export default {
   },
 };
 </script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#app {
+  @apply w-screen min-h-screen bg-gray-200 pt-16 flex;
+}
+</style>
