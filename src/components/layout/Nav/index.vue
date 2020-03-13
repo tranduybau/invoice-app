@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      isLoggin: true,
+      isLoggin: false,
     };
   },
   computed: {

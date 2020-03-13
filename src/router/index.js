@@ -7,22 +7,22 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../views/Home.vue'),
+    component: () => import('../views/Home'),
   },
   {
     path: '/create-new-invoice',
     name: 'CreateNewInvoice',
-    component: () => import('../views/CreateNewInvoice.vue'),
+    component: () => import('../views/CreateNewInvoice'),
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue'),
+    component: () => import('../views/Login'),
   },
   {
     path: '/register',
     name: 'Register',
-    component: () => import('../views/Register.vue'),
+    component: () => import('../views/Register'),
   },
 ];
 
