@@ -20,14 +20,14 @@ const arrayRoute = ['/login', '/register', '/forgot-password'];
 
 export default {
   name: 'Nav',
+  data() {
+    return {
+      isLoggin: false,
+    };
+  },
   components: {
     Logged,
     Unlog,
-  },
-  data() {
-    return {
-      isLoggin: true,
-    };
   },
   computed: {
     isShowNav() {

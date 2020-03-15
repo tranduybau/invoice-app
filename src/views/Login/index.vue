@@ -7,15 +7,17 @@
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
-        <input id="username" type="text" placeholder="Username" />
+        <input type="text" placeholder="Username" v-model="email" />
       </div>
       <div class="mb-6">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-        <input class="mb-3" id="password" type="password" placeholder="******" />
+        <input class="mb-3" type="password" placeholder="******" v-model="password" />
         <!-- <p class="text-red-500 text-xs italic">Please choose a password.</p> -->
       </div>
       <div class="flex items-center justify-between">
-        <button class="btn" type="button">Sign In</button>
+        <button class="btn" type="button" @click="() => checkLogin({ email, password })">
+          Sign In
+        </button>
         <!-- <router-link
           class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
           to="/forgot-password"
@@ -28,18 +30,26 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+// import { isEmpty as _isEmpty } from 'lodash';
 import ArrowLeft from 'vue-material-design-icons/ChevronLeft.vue';
 
 export default {
   name: 'Login',
-  data() {
-    return {
-      prevRoute: '/',
-    };
-  },
   components: {
     ArrowLeft,
   },
+  data() {
+    return {
+      prevRoute: '/',
+      email: '',
+      password: '',
+    };
+  },
+  computed: {
+    ...mapState('user', ['isAuthenticated', 'userInfo']),
+  },
+  created() {},
   beforeRouteEnter(to, from, next) {
     next((vm) => {
       // eslint-disable-next-line no-param-reassign
@@ -47,6 +57,7 @@ export default {
     });
   },
   methods: {
+    ...mapActions('user', ['checkLogin']),
     handleGoBack() {
       this.$router.push(this.prevRoute.path);
     },

@@ -1,0 +1,167 @@
+{
+	"users": [{
+		"id": "1584177315024",
+		"email": "trdbau@gmail.com",
+		"password": "bao123",
+		"token": "1584177315024",
+		"name": "Tran Duy Bau",
+		"address": {
+			"city": "Da Nang",
+			"street": "123 Abc Street"
+		},
+		"phone": "0123654789"
+	}, {
+		"id": "1584177319076",
+		"email": "trqbao@gmail.com",
+		"password": "bao123",
+		"token": "1584177319076",
+		"name": "Tran Quoc Bao",
+		"address": {
+			"city": "Da Nang",
+			"street": "123 Abc"
+		},
+		"phone": "103492817"
+	}],
+	"invoices": [{
+		"userId": "1584177315024",
+		"total": 2,
+		"invoicesUser": [{
+			"id": "1584177315024_1",
+			"logo": "https://bit.ly/39PFOd3",
+			"business": {
+				"name": "Minh Anh Resort",
+				"address": {
+					"city": "Hoi An City",
+					"street": "1232137 Street"
+				},
+				"email": "minhanh137@gmail.com",
+				"phone": "0905983875"
+			},
+			"title": "Paying 1",
+			"billTo": {
+				"isCurrentUser": false,
+				"newClient": {
+					"name": "Ngo Thuy Mien",
+					"address": {
+						"city": "Da Nang",
+						"street": "22132"
+					},
+					"email": "mienthuy1@gmail.com",
+					"phone": "0929123123"
+				}
+			},
+			"invoiceNumber": "123123",
+			"dateCreated": "3/14/2020",
+			"items": [{
+				"id": "1584177315024_1_1",
+				"index": "1",
+				"description": "product 1",
+				"quantity": "5",
+				"unitPrice": "2"
+			}, {
+				"id": "1584177315024_1_2",
+				"index": "2",
+				"description": "product 2",
+				"quantity": "5",
+				"unitPrice": "5"
+			}]
+		}, {
+			"id": "1584177315024_2",
+			"logo": "https://bit.ly/39PFOd3",
+			"business": {
+				"name": "Hoang Ha Mobile",
+				"address": {
+					"city": "Ha Noi",
+					"street": "asdasd"
+				},
+				"email": "hoanghamobile@gmail.com",
+				"phone": "1231231011"
+			},
+			"title": "get pay 2",
+			"billTo": {
+				"isCurrentUser": true
+			},
+			"invoiceNumber": "234324",
+			"dateCreated": "3/14/2020",
+			"items": [{
+				"id": "1584177315024_2_1",
+				"index": "1",
+				"description": "product 1",
+				"quantity": "5",
+				"unitPrice": "214"
+			}, {
+				"id": "1584177315024_2_2",
+				"index": "2",
+				"description": "product 1",
+				"quantity": "5",
+				"unitPrice": "23532"
+			}]
+		}]
+	}, {
+		"userId": "1584177319076",
+		"total": "2",
+		"invoicesUser": [{
+			"id": "1584177319076_1",
+			"logo": "https://bit.ly/39PFOd3",
+			"business": {
+				"name": "Hoang Ha Mobile",
+				"address": {
+					"city": "Da Nang",
+					"street": "asdqeer"
+				},
+				"email": "hoanghamobile@gmail.com",
+				"phone": "0123654789"
+			},
+			"title": "get pay 2",
+			"billTo": {
+				"isCurrentUser": true
+			},
+			"invoiceNumber": "234324",
+			"dateCreated": "3/14/2020",
+			"items": [{
+				"id": "1584177319076_1_1",
+				"index": "1",
+				"description": "product 1",
+				"quantity": "5",
+				"unitPrice": "2"
+			}, {
+				"id": "1584177319076_1_2",
+				"index": "2",
+				"description": "product 1",
+				"quantity": "5",
+				"unitPrice": "2"
+			}]
+		}, {
+			"id": "1584177319076_2",
+			"logo": "https://bit.ly/39PFOd3",
+			"business": {
+				"name": "Tran Duy Bau",
+				"address": {
+					"city": "Da Nang",
+					"street": "123 Abc Street"
+				},
+				"email": "trdbau@gmail.com",
+				"phone": "0905983875"
+			},
+			"title": "Paying 1",
+			"billTo": {
+				"isCurrentUser": true
+			},
+			"invoiceNumber": "123123",
+			"dateCreated": "3/14/2020",
+			"items": [{
+				"id": "1584177319076_2_1",
+				"index": "1",
+				"description": "product 1",
+				"quantity": "5",
+				"unitPrice": "214"
+			}, {
+				"id": "1584177319076_2_2",
+				"index": "2",
+				"description": "product 1",
+				"quantity": "5",
+				"unitPrice": "23532"
+			}]
+		}]
+	}]
+}
