@@ -15,7 +15,7 @@
         <!-- <p class="text-red-500 text-xs italic">Please choose a password.</p> -->
       </div>
       <div class="flex items-center justify-between">
-        <button class="btn" type="button">Sign In</button>
+        <button class="btn" type="button" :click="handleLogin">Sign In</button>
         <!-- <router-link
           class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
           to="/forgot-password"
@@ -50,6 +50,7 @@ export default {
     handleGoBack() {
       this.$router.push(this.prevRoute.path);
     },
+    handleLogin() {},
   },
 };
 </script>
