@@ -1,14 +1,14 @@
 <template>
   <div class="w-full h-full">
     <div class="text-xs text-gray-500">HOME</div>
-    <welcome />
-    <invoices />
+    <welcome v-if="!isAuthenticated" />
+    <invoices v-else />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import Invoices from './ListInvoices';
+import Invoices from './Invoices';
 import Welcome from './Welcome';
 
 export default {
@@ -19,9 +19,6 @@ export default {
   },
   computed: {
     ...mapState('user', ['isAuthenticated']),
-  },
-  created() {
-    console.log(this.isAuthenticated);
   },
 };
 </script>

@@ -19,3 +19,7 @@ a {
 .btn:focus {
 	@apply outline-none;
 }
+
+.btn:disabled {
+	@apply cursor-not-allowed bg-gray-300;
+}
