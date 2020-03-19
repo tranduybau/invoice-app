@@ -2,7 +2,7 @@
 	"users": [{
 		"id": "1584177315024",
 		"email": "trdbau@gmail.com",
-		"passowrd": "bao123",
+		"password": "bao123",
 		"token": "1584177315024",
 		"name": "Tran Duy Bau",
 		"address": {
@@ -13,7 +13,7 @@
 	}, {
 		"id": "1584177319076",
 		"email": "trqbao@gmail.com",
-		"passowrd": "bao123",
+		"password": "bao123",
 		"token": "1584177319076",
 		"name": "Tran Quoc Bao",
 		"address": {
@@ -24,8 +24,8 @@
 	}],
 	"invoices": [{
 		"userId": "1584177315024",
-		"total": "2",
-		"listInvoices": [{
+		"total": 2,
+		"invoicesUser": [{
 			"id": "1584177315024_1",
 			"logo": "https://bit.ly/39PFOd3",
 			"business": {
@@ -52,7 +52,7 @@
 			},
 			"invoiceNumber": "123123",
 			"dateCreated": "3/14/2020",
-			"listItems": [{
+			"items": [{
 				"id": "1584177315024_1_1",
 				"index": "1",
 				"description": "product 1",
@@ -83,7 +83,7 @@
 			},
 			"invoiceNumber": "234324",
 			"dateCreated": "3/14/2020",
-			"listItems": [{
+			"items": [{
 				"id": "1584177315024_2_1",
 				"index": "1",
 				"description": "product 1",
@@ -100,7 +100,7 @@
 	}, {
 		"userId": "1584177319076",
 		"total": "2",
-		"listInvoices": [{
+		"invoicesUser": [{
 			"id": "1584177319076_1",
 			"logo": "https://bit.ly/39PFOd3",
 			"business": {
@@ -118,7 +118,7 @@
 			},
 			"invoiceNumber": "234324",
 			"dateCreated": "3/14/2020",
-			"listItems": [{
+			"items": [{
 				"id": "1584177319076_1_1",
 				"index": "1",
 				"description": "product 1",
@@ -149,7 +149,7 @@
 			},
 			"invoiceNumber": "123123",
 			"dateCreated": "3/14/2020",
-			"listItems": [{
+			"items": [{
 				"id": "1584177319076_2_1",
 				"index": "1",
 				"description": "product 1",

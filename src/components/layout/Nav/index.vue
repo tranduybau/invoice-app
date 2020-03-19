@@ -5,7 +5,7 @@
         <img alt="codersX-logo" src="@/assets/logo.png" class="h-6" />
       </router-link>
       <div class="flex-grow text-right h-full">
-        <logged v-if="isLoggin" />
+        <logged v-if="isAuthenticated" />
         <unlog v-else />
       </div>
     </div>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Logged from './Menu/Logged.vue';
 import Unlog from './Menu/Unlog.vue';
 
@@ -24,15 +25,11 @@ export default {
     Logged,
     Unlog,
   },
-  data() {
-    return {
-      isLoggin: true,
-    };
-  },
   computed: {
     isShowNav() {
       return arrayRoute.includes(this.$route.path);
     },
+    ...mapState('user', ['isAuthenticated']),
   },
 };
 </script>

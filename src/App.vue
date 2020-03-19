@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <notifications />
     <Nav />
     <div class="container mx-auto flex-grow py-4 flex items-center">
       <router-view />
@@ -8,7 +9,7 @@
 </template>
 
 <script>
-import Nav from '@/components/layout/Nav.vue';
+import Nav from '@/components/layout/Nav';
 
 export default {
   name: 'App',
