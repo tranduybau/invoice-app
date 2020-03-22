@@ -43,7 +43,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import { getToken, setToken, removeToken } from '@/utils/Auth.js';
+import { removeToken } from '@/utils/Auth.js';
 // import { isEmpty as _isEmpty } from 'lodash';
 import ArrowLeft from 'vue-material-design-icons/ChevronLeft.vue';
 
@@ -64,10 +64,7 @@ export default {
   },
   watch: {
     isAuthenticated(value) {
-      if (value) {
-        setToken();
-        this.$router.push('/');
-      }
+      if (value) this.$router.push('/');
     },
     errMess(value) {
       if (value.length) {
@@ -88,9 +85,6 @@ export default {
         text: "You've already been authenticated",
       });
       this.$router.push('/');
-    } else if (getToken()) {
-      const token = getToken();
-      this.checkLogin({ token });
     }
   },
   beforeRouteEnter(to, from, next) {
