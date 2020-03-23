@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
 import { get as _get, isEmpty as _isEmpty } from 'lodash';
+import { setToken } from '@/utils/Auth.js';
 
 const user = {
   namespaced: true,
@@ -18,6 +18,7 @@ const user = {
       _state.isLoading = isLoading;
     },
     LOGIN: (_state, userInfo) => {
+      setToken(userInfo.token);
       _state.isAuthenticated = true;
       _state.userInfo = userInfo;
     },
@@ -38,14 +39,12 @@ const user = {
   actions: {
     async checkLogin({ commit }, params) {
       commit('SET_LOADING', true);
-      const response = await axios.get('http://localhost:3000/users', {
-        params,
-      });
+      const response = await axios.get('http://localhost:3000/users', { params });
       const userInfo = _get(response, 'data[0]', {});
       if (!_isEmpty(userInfo)) commit('LOGIN', userInfo);
       else commit('ERROR_ON_LOGIN', params);
-      commit('SET_LOADING', false);
       setTimeout(() => {
+        commit('SET_LOADING', false);
         commit('RESET_ERROR_MESSAGE');
       }, 0);
     },

@@ -9,12 +9,24 @@
 </template>
 
 <script>
+import { getToken } from '@/utils/Auth.js';
+import { mapActions } from 'vuex';
 import Nav from '@/components/layout/Nav';
 
 export default {
   name: 'App',
   components: {
     Nav,
+  },
+  created() {
+    const token = getToken();
+
+    if (token && token !== 'undefined') {
+      this.checkLogin({ token });
+    }
+  },
+  methods: {
+    ...mapActions('user', ['checkLogin']),
   },
 };
 </script>

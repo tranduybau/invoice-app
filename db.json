@@ -64,7 +64,8 @@
 				"description": "product 2",
 				"quantity": "5",
 				"unitPrice": "5"
-			}]
+			}],
+			"isPaid": false
 		}, {
 			"id": "1584177315024_2",
 			"logo": "https://bit.ly/39PFOd3",
@@ -95,7 +96,8 @@
 				"description": "product 1",
 				"quantity": "5",
 				"unitPrice": "23532"
-			}]
+			}],
+			"isPaid": true
 		}]
 	}, {
 		"userId": "1584177319076",
@@ -130,7 +132,8 @@
 				"description": "product 1",
 				"quantity": "5",
 				"unitPrice": "2"
-			}]
+			}],
+			"isPaid": false
 		}, {
 			"id": "1584177319076_2",
 			"logo": "https://bit.ly/39PFOd3",
@@ -161,7 +164,8 @@
 				"description": "product 1",
 				"quantity": "5",
 				"unitPrice": "23532"
-			}]
+			}],
+			"isPaid": false
 		}]
 	}]
 }
