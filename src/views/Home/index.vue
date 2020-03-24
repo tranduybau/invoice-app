@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full h-full">
-    <div class="text-xs text-gray-500">HOME</div>
+  <div class="page-full-screen">
+    <div>HOME</div>
     <welcome v-if="!isAuthenticated" />
     <invoices v-else />
   </div>

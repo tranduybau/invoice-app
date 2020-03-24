@@ -10,6 +10,11 @@ const routes = [
     component: () => import('../views/Home'),
   },
   {
+    path: '/detail/:id',
+    name: 'DetailInvoice',
+    component: () => import('../views/ShowDetailInvoice'),
+  },
+  {
     path: '/create-new-invoice',
     name: 'CreateNewInvoice',
     component: () => import('../views/CreateNewInvoice'),

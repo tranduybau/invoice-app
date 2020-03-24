@@ -23,3 +23,11 @@ a {
 .btn:disabled {
 	@apply cursor-not-allowed bg-gray-300;
 }
+
+.page-full-screen {
+	@apply h-full w-full;
+}
+
+.page-full-screen > div:first-child {
+	@apply text-xs text-gray-500 mb-4;
+}
