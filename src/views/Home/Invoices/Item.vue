@@ -5,9 +5,11 @@
     <td>{{ getStatus }}</td>
     <td>
       <div class="flex items-center">
-        <button class="btn bg-green-500 hover:bg-green-700">
-          <Show :size="14" />
-        </button>
+        <router-link :to="`/detail/${this.invoice.id}`">
+          <button class="btn bg-green-500 hover:bg-green-700">
+            <Show :size="14" />
+          </button>
+        </router-link>
         <button class="btn bg-yellow-500 hover:bg-yellow-700">
           <Edit :size="14" />
         </button>

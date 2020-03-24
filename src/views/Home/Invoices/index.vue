@@ -43,7 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 table {
-  @apply w-full bg-white mt-4 shadow-lg;
+  @apply w-full bg-white shadow-lg;
   thead {
     @apply bg-blue-900 text-white;
     th {
