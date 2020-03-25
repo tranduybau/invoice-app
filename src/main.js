@@ -15,3 +15,12 @@ new Vue({
 }).$mount('#app');
 
 Vue.use(Notifications);
+
+Vue.mixin({
+  methods: {
+    globalFormatCurrency(value, locales = 'es-US', currency = 'USD') {
+      const options = { style: 'currency', currency };
+      return new Intl.NumberFormat(locales, options).format(value);
+    },
+  },
+});

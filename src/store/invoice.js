@@ -46,7 +46,7 @@ const invoice = {
     async getDetailInvoice({ commit, state }, params) {
       commit('SET_LOADING', true);
       const detailInvoice = state.listInvoices.find((item) => item.id === params.id);
-      if (!_isEmpty(detailInvoice)) commit('GET_DETAIL_INVOICE');
+      if (!_isEmpty(detailInvoice)) commit('GET_DETAIL_INVOICE', detailInvoice);
       else commit('ERROR_ON_GET_DATA', 'There is no invoice with that id');
       setTimeout(() => {
         commit('SET_LOADING', false);

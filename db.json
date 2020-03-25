@@ -56,16 +56,21 @@
 				"id": "1584177315024_1_1",
 				"index": "1",
 				"description": "product 1",
-				"quantity": "5",
-				"unitPrice": "2"
+				"quantity": 5,
+				"unitPrice": 2
 			}, {
 				"id": "1584177315024_1_2",
 				"index": "2",
 				"description": "product 2",
-				"quantity": "5",
-				"unitPrice": "5"
+				"quantity": 5,
+				"unitPrice": 5
 			}],
-			"isPaid": false
+			"payStatus": {
+				"done": false,
+				"paid": 2
+			},
+			"locales": "es-US",
+			"currency": "USD"
 		}, {
 			"id": "1584177315024_2",
 			"logo": "https://bit.ly/39PFOd3",
@@ -88,16 +93,20 @@
 				"id": "1584177315024_2_1",
 				"index": "1",
 				"description": "product 1",
-				"quantity": "5",
-				"unitPrice": "214"
+				"quantity": 5,
+				"unitPrice": 214
 			}, {
 				"id": "1584177315024_2_2",
 				"index": "2",
 				"description": "product 1",
-				"quantity": "5",
-				"unitPrice": "23532"
+				"quantity": 4,
+				"unitPrice": 123
 			}],
-			"isPaid": true
+			"payStatus": {
+				"done": true
+			},
+			"locales": "es-US",
+			"currency": "USD"
 		}]
 	}, {
 		"userId": "1584177319076",
@@ -124,16 +133,21 @@
 				"id": "1584177319076_1_1",
 				"index": "1",
 				"description": "product 1",
-				"quantity": "5",
-				"unitPrice": "2"
+				"quantity": 4,
+				"unitPrice": 2
 			}, {
 				"id": "1584177319076_1_2",
 				"index": "2",
 				"description": "product 1",
-				"quantity": "5",
-				"unitPrice": "2"
+				"quantity": 1,
+				"unitPrice": 3
 			}],
-			"isPaid": false
+			"payStatus": {
+				"done": false,
+				"paid": 2
+			},
+			"locales": "es-US",
+			"currency": "USD"
 		}, {
 			"id": "1584177319076_2",
 			"logo": "https://bit.ly/39PFOd3",
@@ -156,16 +170,21 @@
 				"id": "1584177319076_2_1",
 				"index": "1",
 				"description": "product 1",
-				"quantity": "5",
-				"unitPrice": "214"
+				"quantity": 4,
+				"unitPrice": 123
 			}, {
 				"id": "1584177319076_2_2",
 				"index": "2",
 				"description": "product 1",
-				"quantity": "5",
-				"unitPrice": "23532"
+				"quantity": 1,
+				"unitPrice": 2
 			}],
-			"isPaid": false
+			"payStatus": {
+				"done": false,
+				"paid": 2
+			},
+			"locales": "es-US",
+			"currency": "USD"
 		}]
 	}]
 }
