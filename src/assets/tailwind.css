@@ -21,7 +21,7 @@ a {
 }
 
 .btn:disabled {
-	@apply cursor-not-allowed bg-gray-300;
+	@apply cursor-not-allowed bg-gray-300 opacity-50;
 }
 
 .page-full-screen {
@@ -30,4 +30,9 @@ a {
 
 .page-full-screen > div:first-child {
 	@apply text-xs text-gray-500 mb-4;
+}
+
+.empty-img {
+	background: url('./empty.png') no-repeat 0 0;
+	background-size: cover;
 }

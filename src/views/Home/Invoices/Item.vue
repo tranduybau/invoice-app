@@ -6,14 +6,18 @@
     <td>
       <div class="flex items-center">
         <router-link :to="`/detail/${this.invoice.id}`">
-          <button class="btn bg-green-500 hover:bg-green-700">
+          <button class="btn bg-green-500 hover:bg-green-700" title="Show detail invoice">
             <Show :size="14" />
           </button>
         </router-link>
-        <button class="btn bg-yellow-500 hover:bg-yellow-700">
+        <button
+          class="btn bg-yellow-500 hover:bg-yellow-700"
+          title="Edit invoice"
+          :disabled="invoice.payStatus.done"
+        >
           <Edit :size="14" />
         </button>
-        <button class="btn bg-red-500 hover:bg-red-700">
+        <button class="btn bg-red-500 hover:bg-red-700" title="Delete invoice">
           <Delete :size="14" />
         </button>
       </div>
@@ -45,7 +49,7 @@ export default {
       return this.invoice.id.slice(position + 1);
     },
     getStatus() {
-      return this.invoice.isPaid ? 'Paid' : 'Pending';
+      return this.invoice.payStatus.done ? 'Paid' : 'Pending';
     },
   },
 };
