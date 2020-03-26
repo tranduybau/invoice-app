@@ -25,7 +25,7 @@ a {
 }
 
 .page-full-screen {
-	@apply h-full w-full;
+	@apply h-full w-full relative;
 }
 
 .page-full-screen > div:first-child {
