@@ -1,25 +1,38 @@
 <template>
-  <tr>
-    <td>{{ showId }}</td>
-    <td>{{ invoice.title }}</td>
-    <td>{{ getStatus }}</td>
-    <td>
-      <div class="flex items-center">
-        <router-link :to="`/detail/${this.invoice.id}`">
-          <button class="btn bg-green-500 hover:bg-green-700" title="Show detail invoice">
-            <Show :size="14" />
-          </button>
+  <tr class="duration-300 hover:bg-gray-100">
+    <td class="border-r border-white w-12 text-center">{{ showId }}</td>
+    <td class="border-r border-white">{{ invoice.title }}</td>
+    <td class="border-r border-white w-12 text-center">{{ getStatus }}</td>
+    <td class="w-40">
+      <div class="flex items-center justify-between">
+        <router-link
+          :to="`/detail/${this.invoice.id}`"
+          class="btn p-2 bg-green-500 hover:bg-green-700"
+          title="Show detail invoice"
+        >
+          <Show :size="14" />
         </router-link>
-        <button
-          class="btn bg-yellow-500 hover:bg-yellow-700"
+        <router-link
+          class="btn p-2 bg-yellow-500 hover:bg-yellow-700"
           title="Edit invoice"
-          :disabled="invoice.payStatus.done"
+          :to="`/edit/${this.invoice.id}`"
+          :class="{ 'opacity-50 cursor-not-allowed': invoice.payStatus.done }"
+          :event="invoice.payStatus.done ? '' : 'click'"
         >
           <Edit :size="14" />
-        </button>
-        <button class="btn bg-red-500 hover:bg-red-700" title="Delete invoice">
+        </router-link>
+        <button class="btn p-2 bg-red-500 hover:bg-red-700" title="Delete invoice">
           <Delete :size="14" />
         </button>
+        <router-link
+          class="btn p-2"
+          title="Send invoice"
+          to="/"
+          :class="{ 'opacity-50 cursor-not-allowed': invoice.payStatus.done }"
+          :event="invoice.payStatus.done ? '' : 'click'"
+        >
+          <Send :size="14" />
+        </router-link>
       </div>
     </td>
   </tr>
@@ -29,6 +42,7 @@
 import Show from 'vue-material-design-icons/EyeOutline';
 import Edit from 'vue-material-design-icons/FileEditOutline';
 import Delete from 'vue-material-design-icons/DeleteOutline';
+import Send from 'vue-material-design-icons/Send';
 
 export default {
   name: 'InvoiceItem',
@@ -42,6 +56,7 @@ export default {
     Show,
     Edit,
     Delete,
+    Send,
   },
   computed: {
     showId() {
@@ -56,28 +71,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-tr {
-  @apply duration-300;
-  &:hover {
-    @apply bg-gray-100;
-  }
-  & > *:not(:nth-child(2)) {
-    @apply w-12 text-center;
-  }
-  & > *:not(:last-child) {
-    @apply border-r border-white;
-  }
-  & > *:last-child {
-    @apply w-32;
-    & > div {
-      @apply flex justify-between;
-    }
-  }
-  & td {
-    @apply px-4 py-2 text-gray-700;
-    button {
-      @apply p-2;
-    }
-  }
+td {
+  @apply px-4 py-2 text-gray-700;
 }
 </style>

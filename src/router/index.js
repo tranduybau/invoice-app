@@ -16,8 +16,9 @@ const routes = [
   },
   {
     path: '/create-new-invoice',
+    alias: '/edit/:id',
     name: 'CreateNewInvoice',
-    component: () => import('../views/CreateNewInvoice'),
+    component: () => import('../views/FormInvoice'),
     meta: { requiresAuth: true },
   },
   {

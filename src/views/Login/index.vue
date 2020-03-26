@@ -44,7 +44,6 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import { removeToken } from '@/utils/Auth.js';
-// import { isEmpty as _isEmpty } from 'lodash';
 import ArrowLeft from 'vue-material-design-icons/ChevronLeft.vue';
 
 export default {
