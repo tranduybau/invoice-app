@@ -4,6 +4,7 @@
 import axios from 'axios';
 import { get as _get, isEmpty as _isEmpty } from 'lodash';
 import { setToken } from '@/utils/Auth.js';
+import Vue from 'vue';
 
 const user = {
   namespaced: true,
@@ -15,7 +16,10 @@ const user = {
   },
   mutations: {
     SET_LOADING: (_state, isLoading) => {
-      _state.isLoading = isLoading;
+      // console.log('1', _state);
+      // _state = { ..._state, isLoading };
+      // console.log('2', _state);
+      Vue.set(_state, 'isLoading', isLoading);
     },
     LOGIN: (_state, userInfo) => {
       setToken(userInfo.token);

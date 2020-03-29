@@ -35,7 +35,7 @@
       <div class="flex flex-wrap pb-4">
         <input type="text" class="text-right font-bold text-xl mb-8 w-full" placeholder="INVOICE" />
         <div class="w-1/2 flex">
-          <b>Bill To</b>
+          <b class="whitespace-no-wrap">Bill To</b>
           <div class="ml-3">
             <input type="tel" placeholder="Client Name" />
             <input type="tel" placeholder="Client Address" />
@@ -67,12 +67,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="border p-1 border-black">product 1</td>
-            <td class="border p-1 border-black">5</td>
-            <td class="border p-1 border-black">$2.00</td>
-            <td class="border p-1 border-black">$10.00</td>
-          </tr>
+          <form-invoice-item
+            v-for="(item, index) in items"
+            :item="item"
+            :key="index"
+            :locales="locales"
+            :currency="currency"
+          />
           <tr>
             <td></td>
             <td></td>
@@ -100,13 +101,22 @@
 <script>
 import { get as _get } from 'lodash';
 import ImagePlus from 'vue-material-design-icons/ImagePlus';
+import FormInvoiceItem from './Item.vue';
+
+// const item = {
+//   id: '',
+//   index: '',
+//   description: '',
+//   quantity: 0,
+//   unitPrice: 0,
+// };
 
 export default {
   name: 'FormInvoice',
   data() {
     return {
       logo: '',
-      id: '1584177315024_1',
+      id: '',
       business: {
         name: '',
         address: {
@@ -118,7 +128,7 @@ export default {
       },
       title: '',
       billTo: {
-        isCurrentUser: false,
+        isCurrentUser: true,
         newClient: {
           name: '',
           address: {
@@ -131,22 +141,7 @@ export default {
       },
       invoiceNumber: '',
       dateCreated: '',
-      items: [
-        {
-          id: '',
-          index: '',
-          description: '',
-          quantity: 0,
-          unitPrice: 0,
-        },
-        {
-          id: '',
-          index: '',
-          description: '',
-          quantity: 0,
-          unitPrice: 0,
-        },
-      ],
+      items: [{}],
       payStatus: {
         done: false,
         paid: 0,
@@ -157,10 +152,11 @@ export default {
   },
   components: {
     ImagePlus,
+    FormInvoiceItem,
   },
   computed: {
     pathOfUserInfo() {
-      const id = _get(this, '$route.params', null);
+      const id = _get(this, '$route.params.id', false);
       return id ? 'EDIT' : 'NEW INVOICE';
     },
   },
