@@ -3,7 +3,7 @@
     <div>DETAIL</div>
     <div
       class="bg-white py-16 px-8 shadow max-w-2xl mx-auto text-xs relative"
-      v-if="statusOfInvoice === 'success'"
+      v-if="statusOfFetchInvoice === 'success'"
       @mouseover="showEdit"
       @mouseleave="hideEdit"
     >
@@ -65,7 +65,7 @@ export default {
   },
   computed: {
     ...mapState('invoice', ['listInvoices', 'detailInvoice']),
-    statusOfInvoice() {
+    statusOfFetchInvoice() {
       if (!_isEmpty(this.detailInvoice)) return 'success';
       return 'loading';
     },
