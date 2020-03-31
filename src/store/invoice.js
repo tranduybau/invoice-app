@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
-import { get as _get, isEmpty as _isEmpty } from 'lodash';
+import lodash from '@/utils/lodash';
 
 const invoice = {
   namespaced: true,
@@ -35,8 +35,8 @@ const invoice = {
     async getListInvoices({ commit }, params) {
       commit('SET_LOADING', true);
       const response = await axios.get('http://localhost:3000/invoices', { params });
-      const listInvoices = _get(response, 'data[0]', {});
-      if (!_isEmpty(listInvoices)) commit('GET_LIST_INVOICES', response.data);
+      const listInvoices = lodash.get(response, 'data[0]', {});
+      if (!lodash.isEmpty(listInvoices)) commit('GET_LIST_INVOICES', response.data);
       else commit('ERROR_ON_GET_DATA', 'User has no invoice yet!');
       setTimeout(() => {
         commit('SET_LOADING', false);
@@ -46,7 +46,7 @@ const invoice = {
     async getDetailInvoice({ commit, state }, params) {
       commit('SET_LOADING', true);
       const detailInvoice = state.listInvoices.find((item) => item.id === params.id);
-      if (!_isEmpty(detailInvoice)) commit('GET_DETAIL_INVOICE', detailInvoice);
+      if (!lodash.isEmpty(detailInvoice)) commit('GET_DETAIL_INVOICE', detailInvoice);
       else commit('ERROR_ON_GET_DATA', 'There is no invoice with that id');
       setTimeout(() => {
         commit('SET_LOADING', false);

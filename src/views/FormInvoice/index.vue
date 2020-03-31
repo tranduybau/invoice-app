@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import { get as _get } from 'lodash';
+import lodash from '@/utils/lodash';
 import ImagePlus from 'vue-material-design-icons/ImagePlus';
 import FormInvoiceItem from './Item.vue';
 
@@ -141,7 +141,13 @@ export default {
       },
       invoiceNumber: '',
       dateCreated: '',
-      items: [{}],
+      items: [
+        {
+          description: '',
+          quantity: 0,
+          unitPrice: 0,
+        },
+      ],
       payStatus: {
         done: false,
         paid: 0,
@@ -156,7 +162,7 @@ export default {
   },
   computed: {
     pathOfUserInfo() {
-      const id = _get(this, '$route.params.id', false);
+      const id = lodash.get(this, '$route.params.id', false);
       return id ? 'EDIT' : 'NEW INVOICE';
     },
   },

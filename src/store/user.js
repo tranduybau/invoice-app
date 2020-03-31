@@ -2,9 +2,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
-import { get as _get, isEmpty as _isEmpty } from 'lodash';
+import lodash from '@/utils/lodash';
 import { setToken } from '@/utils/Auth.js';
-import Vue from 'vue';
 
 const user = {
   namespaced: true,
@@ -19,7 +18,7 @@ const user = {
       // console.log('1', _state);
       // _state = { ..._state, isLoading };
       // console.log('2', _state);
-      Vue.set(_state, 'isLoading', isLoading);
+      _state.isLoading = isLoading;
     },
     LOGIN: (_state, userInfo) => {
       setToken(userInfo.token);
@@ -44,8 +43,8 @@ const user = {
     async checkLogin({ commit }, params) {
       commit('SET_LOADING', true);
       const response = await axios.get('http://localhost:3000/users', { params });
-      const userInfo = _get(response, 'data[0]', {});
-      if (!_isEmpty(userInfo)) commit('LOGIN', userInfo);
+      const userInfo = lodash.get(response, 'data[0]', {});
+      if (!lodash.isEmpty(userInfo)) commit('LOGIN', userInfo);
       else commit('ERROR_ON_LOGIN', params);
       setTimeout(() => {
         commit('SET_LOADING', false);
