@@ -44,7 +44,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import { isEmpty as _isEmpty } from 'lodash';
+import lodash from '@/utils/lodash';
 import Edit from 'vue-material-design-icons/FileEditOutline';
 import BusinessInfo from './BusinessInfo';
 import ClientInfo from './ClientInfo';
@@ -66,7 +66,7 @@ export default {
   computed: {
     ...mapState('invoice', ['listInvoices', 'detailInvoice']),
     statusOfFetchInvoice() {
-      if (!_isEmpty(this.detailInvoice)) return 'success';
+      if (!lodash.isEmpty(this.detailInvoice)) return 'success';
       return 'loading';
     },
   },
@@ -76,14 +76,14 @@ export default {
 
     if (!userId) this.$router.push('/');
 
-    if (_isEmpty(this.listInvoices)) {
+    if (lodash.isEmpty(this.listInvoices)) {
       await this.getListInvoices({ userId });
     }
 
-    if (_isEmpty(this.listInvoices)) this.$router.push('/');
+    if (lodash.isEmpty(this.listInvoices)) this.$router.push('/');
 
     await this.getDetailInvoice({ id });
-    if (_isEmpty(this.detailInvoice)) this.$router.push('/');
+    if (lodash.isEmpty(this.detailInvoice)) this.$router.push('/');
   },
   methods: {
     ...mapActions('invoice', ['getDetailInvoice', 'getListInvoices']),
