@@ -4,7 +4,13 @@
       <BellRing v-if="isHasNotify" />
       <Bell v-else />
     </div>
-    <img src="@/assets/user.png" alt="" class="h-full" />
+    <div class="relative h-full">
+      <img src="@/assets/user.png" alt="" class="h-full relative" />
+
+      <div class="absolute right-0 z-50" id="user-nav">
+        <div>User</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,5 +29,13 @@ export default {
     Bell,
     BellRing,
   },
+  methods: {
+    logOut() {
+      alert(1);
+    },
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+</style>

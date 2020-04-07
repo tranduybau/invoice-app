@@ -5,6 +5,8 @@ import user from './user.js';
 import invoice from './invoice.js';
 import utils from './utils.js';
 
+import getters from './getters.js';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -13,4 +15,5 @@ export default new Vuex.Store({
     invoice,
     utils,
   },
+  getters,
 });

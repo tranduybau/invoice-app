@@ -1,54 +1,44 @@
 /* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
 import lodash from '@/utils/lodash';
-import { setToken } from '@/utils/Auth.js';
+import { setToken, removeToken } from '@/utils/Auth.js';
+import { LOG_IN, LOG_OUT } from './constance.js';
 
 const user = {
   namespaced: true,
   state: {
     userInfo: {},
     isAuthenticated: false,
-    errMess: '',
-    isLoading: false,
   },
   mutations: {
-    SET_LOADING: (_state, isLoading) => {
-      // console.log('1', _state);
-      // _state = { ..._state, isLoading };
-      // console.log('2', _state);
-      _state.isLoading = isLoading;
-    },
-    LOGIN: (_state, userInfo) => {
+    [LOG_IN]: (_state, userInfo) => {
       setToken(userInfo.token);
       _state.isAuthenticated = true;
       _state.userInfo = userInfo;
     },
-    LOGOUT: (_state) => {
-      _state = { userInfo: {}, isAuthenticated: false };
-    },
-    ERROR_ON_LOGIN: (_state, params) => {
-      const arrWrongInfo = Object.getOwnPropertyNames(params);
-      const arrWrongInfoFormatted = arrWrongInfo.map((name) => name.charAt(0).toUpperCase() + name.slice(1));
-      const wrongInfo = arrWrongInfoFormatted.join(' or ');
-      const errMess = `${wrongInfo} is wrong!`;
-      _state.errMess = errMess;
-    },
-    RESET_ERROR_MESSAGE: (_state) => {
-      _state.errMess = '';
+    [LOG_OUT]: (_state) => {
+      removeToken();
+      _state.isAuthenticated = false;
+      _state.userInfo = {};
     },
   },
   actions: {
     async checkLogin({ commit }, params) {
-      commit('SET_LOADING', true);
+      commit('utils/SET_LOADING', true, { root: true });
       const response = await axios.get('http://localhost:3000/users', { params });
       const userInfo = lodash.get(response, 'data[0]', {});
-      if (!lodash.isEmpty(userInfo)) commit('LOGIN', userInfo);
-      else commit('ERROR_ON_LOGIN', params);
+      if (!lodash.isEmpty(userInfo)) commit('LOG_IN', userInfo);
+      else commit('utils/SET_ERROR', 'Email or password is incorrect!', { root: true });
       setTimeout(() => {
-        commit('SET_LOADING', false);
-        commit('RESET_ERROR_MESSAGE');
+        commit('utils/SET_LOADING', false, { root: true });
+      }, 0);
+    },
+    async logout({ commit }) {
+      commit('utils/SET_LOADING', true, { root: true });
+      commit('LOG_OUT');
+      setTimeout(() => {
+        commit('utils/SET_LOADING', false, { root: true });
       }, 0);
     },
   },
