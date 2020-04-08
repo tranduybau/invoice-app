@@ -2,31 +2,19 @@
   <div id="app">
     <notifications />
     <Nav />
-    <div class="container mx-auto flex-grow py-4 flex items-center">
+    <div class="container mx-auto flex-grow py-4 flex items-center z-0">
       <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import { getToken } from '@/utils/Auth.js';
-import { mapActions } from 'vuex';
 import Nav from '@/components/layout/Nav';
 
 export default {
   name: 'App',
   components: {
     Nav,
-  },
-  created() {
-    const token = getToken();
-
-    if (token && token !== 'undefined') {
-      this.checkLogin({ token });
-    }
-  },
-  methods: {
-    ...mapActions('user', ['checkLogin']),
   },
 };
 </script>

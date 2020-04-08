@@ -10,9 +10,16 @@ const routes = [
     component: () => import('../views/Home'),
   },
   {
+    path: '/my-page',
+    name: 'My Invoices',
+    component: () => import('../views/MyPage'),
+    meta: { requiresAuth: true },
+  },
+  {
     path: '/detail/:id',
     name: 'DetailInvoice',
     component: () => import('../views/ShowDetailInvoice'),
+    meta: { requiresAuth: true },
   },
   {
     path: '/edit/:id',

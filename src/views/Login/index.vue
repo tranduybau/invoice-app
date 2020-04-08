@@ -43,8 +43,8 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import { removeToken } from '@/utils/Auth.js';
 import ArrowLeft from 'vue-material-design-icons/ChevronLeft.vue';
+// import firebase from 'firebase';
 
 export default {
   name: 'Login',
@@ -53,7 +53,7 @@ export default {
   },
   data() {
     return {
-      prevRoute: '/',
+      errMess: '',
       email: '',
       password: '',
     };
@@ -62,36 +62,24 @@ export default {
     ...mapState('user', ['isAuthenticated', 'userInfo', 'isLoading', 'errMess']),
   },
   watch: {
-    isAuthenticated(value) {
-      if (value) this.$router.push('/');
+    $route: {
+      handler(route) {
+        this.redirect = route.query && route.query.redirect;
+      },
+      immediate: true,
     },
-    errMess(value) {
-      if (value.length) {
-        this.$notify({
-          type: 'error',
-          title: 'Login denied',
-          text: value,
-        });
-        removeToken();
+    isAuthenticated(newVal) {
+      if (newVal) {
+        this.$router.push({ path: this.redirect || '/my-page' });
       }
     },
   },
-  created() {
-    if (this.isAuthenticated) {
-      this.$notify({
-        type: 'error',
-        title: 'Action denied',
-        text: "You've already been authenticated",
-      });
-      this.$router.push('/');
-    }
-  },
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      // eslint-disable-next-line no-param-reassign
-      vm.prevRoute = from;
-    });
-  },
+  // beforeRouteEnter(to, from, next) {
+  //   next((vm) => {
+  //    eslint-disable-next-line no-param-reassign
+  //     vm.errMess = from;
+  //   });
+  // },
   methods: {
     ...mapActions('user', ['checkLogin']),
     handleGoBack() {

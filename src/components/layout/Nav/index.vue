@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 nav {
-  @apply w-full h-16 fixed left-0 top-0 p-4 bg-white transform duration-300;
+  @apply w-full h-16 fixed left-0 top-0 p-4 bg-white transform duration-300 z-10;
 }
 .navbar-content {
   @apply h-full flex items-center justify-between mx-auto;
