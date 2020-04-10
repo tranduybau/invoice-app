@@ -19,23 +19,24 @@
           :disabled="isLoading"
           @keyup.enter="() => checkLogin({ email, password })"
         />
-        <!-- <p class="text-red-500 text-xs italic">Please choose a password.</p> -->
       </div>
-      <div class="flex items-center justify-between">
-        <button
-          class="btn"
-          type="button"
-          :disabled="!email.length || !password.length"
-          @click="() => checkLogin({ email, password })"
-        >
-          Sign In
-        </button>
-        <!-- <router-link
-          class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-          to="/forgot-password"
-        >
+      <button
+        class="btn w-full"
+        type="button"
+        :disabled="!email.length || !password.length"
+        @click="() => checkLogin({ email, password })"
+      >
+        Sign In
+      </button>
+      <div class="border border-b border-gray-300 my-4" />
+      <div class="text-center">
+        <router-link class="hover:text-red-500" to="/forgot-password">
           Forgot Password?
-        </router-link>-->
+        </router-link>
+        <div>Or</div>
+        <router-link class="hover:text-green-500" to="/register">
+          Create A New Account
+        </router-link>
       </div>
     </form>
   </div>
@@ -53,13 +54,14 @@ export default {
   },
   data() {
     return {
-      errMess: '',
       email: '',
       password: '',
+      redirect: this.$route.query ? this.$route.query.redirect : '/my-page',
     };
   },
   computed: {
-    ...mapState('user', ['isAuthenticated', 'userInfo', 'isLoading', 'errMess']),
+    ...mapState('user', ['isAuthenticated', 'userInfo']),
+    ...mapState('utils', ['isLoading']),
   },
   watch: {
     $route: {
@@ -70,19 +72,22 @@ export default {
     },
     isAuthenticated(newVal) {
       if (newVal) {
-        this.$router.push({ path: this.redirect || '/my-page' });
+        this.$router.push({ path: this.redirect });
       }
     },
   },
-  // beforeRouteEnter(to, from, next) {
-  //   next((vm) => {
-  //    eslint-disable-next-line no-param-reassign
-  //     vm.errMess = from;
-  //   });
-  // },
+  created() {
+    this.logout();
+  },
   methods: {
-    ...mapActions('user', ['checkLogin']),
-    handleGoBack() {
+    ...mapActions('user', ['checkLogin', 'logout']),
+    async handleGoBack() {
+      // const user = await firebase
+      //   .auth()
+      //   .signInWithEmailAndPassword('trdbau@gmail.com', 'bao123')
+      //   .catch((error) => error);
+
+      // console.log(user);
       this.$router.push('/');
     },
   },
