@@ -42,8 +42,9 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: () => import('../views/Register'),
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
+  { path: '*', redirect: '/' },
 ];
 
 const router = new VueRouter({

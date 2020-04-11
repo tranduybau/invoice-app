@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
-import axios from 'axios';
-import lodash from '@/utils/lodash';
-import { setToken, removeToken } from '@/utils/Auth.js';
+// import axios from 'axios';
+// import lodash from '@/utils/lodash';
+import firebase from 'firebase';
 import { LOG_IN, LOG_OUT } from './constance.js';
 
 const user = {
@@ -13,26 +13,31 @@ const user = {
   },
   mutations: {
     [LOG_IN]: (_state, userInfo) => {
-      setToken(userInfo.token);
       _state.isAuthenticated = true;
       _state.userInfo = userInfo;
     },
     [LOG_OUT]: (_state) => {
-      removeToken();
       _state.isAuthenticated = false;
       _state.userInfo = {};
     },
   },
   actions: {
     async checkLogin({ commit }, params) {
+      const { email, password } = params;
       commit('utils/SET_LOADING', true, { root: true });
-      const response = await axios.get('http://localhost:3000/users', { params });
-      const userInfo = lodash.get(response, 'data[0]', {});
-      if (!lodash.isEmpty(userInfo)) commit('LOG_IN', userInfo);
-      else commit('utils/SET_ERROR', 'Email or password is incorrect!', { root: true });
-      setTimeout(() => {
-        commit('utils/SET_LOADING', false, { root: true });
-      }, 0);
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((result) => {
+          commit('LOG_IN', result);
+        }).catch(() => {
+          commit('utils/SET_ERROR', 'Wrong email or password!', { root: true });
+        })
+        .then(() => {
+          setTimeout(() => {
+            commit('utils/SET_LOADING', false, { root: true });
+            commit('utils/SET_ERROR', '', { root: true });
+          }, 0);
+        });
     },
     async logout({ commit }) {
       commit('utils/SET_LOADING', true, { root: true });
