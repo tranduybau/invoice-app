@@ -30,11 +30,11 @@
       </button>
       <div class="border border-b border-gray-300 my-4" />
       <div class="text-center">
-        <router-link class="hover:text-red-500" to="/forgot-password">
+        <router-link class="text-red-500 hover:text-red-700" to="/forgot-password">
           Forgot Password?
         </router-link>
         <div>Or</div>
-        <router-link class="hover:text-blue-500" to="/register">
+        <router-link class="text-blue-500 hover:text-blue-700" to="/login">
           Login
         </router-link>
       </div>

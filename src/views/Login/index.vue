@@ -1,6 +1,6 @@
 <template>
   <div class="w-full max-w-xs mx-auto relative relative -mt-12">
-    <div @click="handleGoBack()" class="go-back-btn">
+    <div @click="goHome()" class="go-back-btn">
       <ArrowLeft />
       <span>HOME</span>
     </div>
@@ -30,11 +30,11 @@
       </button>
       <div class="border border-b border-gray-300 my-4" />
       <div class="text-center">
-        <router-link class="hover:text-red-500" to="/forgot-password">
+        <router-link class="text-red-500 hover:text-red-700" to="/forgot-password">
           Forgot Password?
         </router-link>
         <div>Or</div>
-        <router-link class="hover:text-green-500" to="/register">
+        <router-link class="text-green-500 hover:text-green-700" to="/register">
           Create A New Account
         </router-link>
       </div>
@@ -43,9 +43,9 @@
 </template>
 
 <script>
+import lodash from '@/utils/lodash';
 import { mapActions, mapState } from 'vuex';
 import ArrowLeft from 'vue-material-design-icons/ChevronLeft.vue';
-// import firebase from 'firebase';
 
 export default {
   name: 'Login',
@@ -56,7 +56,7 @@ export default {
     return {
       email: '',
       password: '',
-      redirect: this.$route.query ? this.$route.query.redirect : '/my-page',
+      redirect: lodash.get(this, '$route.query.redirect', '/my-page'),
     };
   },
   computed: {
@@ -64,12 +64,6 @@ export default {
     ...mapState('utils', ['isLoading']),
   },
   watch: {
-    $route: {
-      handler(route) {
-        this.redirect = route.query && route.query.redirect;
-      },
-      immediate: true,
-    },
     isAuthenticated(newVal) {
       if (newVal) {
         this.$router.push({ path: this.redirect });
@@ -77,17 +71,13 @@ export default {
     },
   },
   created() {
+    console.log(this.redirect);
+
     this.logout();
   },
   methods: {
     ...mapActions('user', ['checkLogin', 'logout']),
-    async handleGoBack() {
-      // const user = await firebase
-      //   .auth()
-      //   .signInWithEmailAndPassword('trdbau@gmail.com', 'bao123')
-      //   .catch((error) => error);
-
-      // console.log(user);
+    async goHome() {
       this.$router.push('/');
     },
   },

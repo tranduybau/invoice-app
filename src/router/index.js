@@ -44,6 +44,7 @@ const routes = [
     component: () => import('../views/Register'),
     meta: { requiresAuth: false },
   },
+  { path: '*', redirect: '/' },
 ];
 
 const router = new VueRouter({
