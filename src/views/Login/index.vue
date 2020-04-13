@@ -12,7 +12,6 @@
       <div class="mb-6">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
         <input
-          class="mb-3"
           type="password"
           placeholder="******"
           v-model="password"
@@ -23,7 +22,7 @@
       <button
         class="btn w-full"
         type="button"
-        :disabled="!email.length || !password.length"
+        :disabled="!email.length || !password.length || isLoading"
         @click="() => checkLogin({ email, password })"
       >
         Sign In
@@ -61,7 +60,7 @@ export default {
   },
   computed: {
     ...mapState('user', ['isAuthenticated', 'userInfo']),
-    ...mapState('utils', ['isLoading']),
+    ...mapState('utils', ['isLoading', 'errorMes']),
   },
   watch: {
     isAuthenticated(newVal) {
@@ -69,10 +68,17 @@ export default {
         this.$router.push({ path: this.redirect });
       }
     },
+    errorMes(newVal) {
+      if (newVal.length) {
+        this.$notify({
+          type: 'error',
+          title: 'Login denied',
+          text: newVal,
+        });
+      }
+    },
   },
   created() {
-    console.log(this.redirect);
-
     this.logout();
   },
   methods: {

@@ -1,47 +1,55 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
-import axios from 'axios';
 import lodash from '@/utils/lodash';
+import firebase from 'firebase';
 
 const invoice = {
   namespaced: true,
   state: {
     listInvoices: [],
     detailInvoice: {},
-    total: 0,
-    errMess: '',
-    isLoading: false,
   },
   mutations: {
-    SET_LOADING: (_state, isLoading) => {
-      _state.isLoading = isLoading;
-    },
-    RESET_ERROR_MESSAGE: (_state) => {
-      _state.errMess = '';
-    },
     GET_LIST_INVOICES: (_state, listInvoices) => {
-      _state.listInvoices = listInvoices['0'].invoicesUser;
-      _state.total = listInvoices['0'].total;
+      _state.listInvoices = listInvoices;
     },
     GET_DETAIL_INVOICE: (_state, detailInvoice) => {
       _state.detailInvoice = detailInvoice;
     },
-    ERROR_ON_GET_DATA: (_state, errMess) => {
-      _state.errMess = errMess;
+    CLEAR_DETAIL_INVOICE: (_state) => {
+      _state.detailInvoice = {};
     },
   },
   actions: {
     async getListInvoices({ commit }, params) {
-      commit('SET_LOADING', true);
-      const response = await axios.get('http://localhost:3000/invoices', { params });
-      const listInvoices = lodash.get(response, 'data[0]', {});
-      if (!lodash.isEmpty(listInvoices)) commit('GET_LIST_INVOICES', response.data);
-      else commit('ERROR_ON_GET_DATA', 'User has no invoice yet!');
-      setTimeout(() => {
-        commit('SET_LOADING', false);
-        commit('RESET_ERROR_MESSAGE');
-      }, 0);
+      const db = firebase.firestore();
+      const { uid, startAt } = params;
+      const arrayList = [];
+
+      commit('utils/SET_LOADING', true, { root: true });
+
+      db.collection('invoice')
+        .where('uid', '==', uid)
+        .orderBy('dateCreated', 'desc')
+        // .startAt(startAt)
+        // .limit(10)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            arrayList.push(doc.data());
+          });
+          commit('GET_LIST_INVOICES', arrayList);
+        })
+        .catch(() => {
+          commit('utils/SET_ERROR', 'Server Error!', { root: true });
+        })
+        .then(() => {
+          setTimeout(() => {
+            commit('utils/SET_LOADING', false, { root: true });
+            commit('utils/SET_ERROR', '', { root: true });
+          }, 0);
+        });
     },
     async getDetailInvoice({ commit, state }, params) {
       commit('SET_LOADING', true);

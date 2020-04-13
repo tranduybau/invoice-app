@@ -1,12 +1,12 @@
 <template>
   <tr class="duration-300 hover:bg-gray-100">
-    <td class="border-r border-white w-12 text-center">{{ showId }}</td>
+    <td class="border-r border-white w-12 text-center">{{ index + 1 }}</td>
     <td class="border-r border-white">{{ invoice.title }}</td>
     <td class="border-r border-white w-12 text-center">{{ getStatus }}</td>
     <td class="w-40">
       <div class="flex items-center justify-between">
         <router-link
-          :to="`/detail/${this.invoice.id}`"
+          :to="`/detail/${this.invoice.invoiceNumber}`"
           class="btn p-2 bg-green-500 hover:bg-green-700"
           title="Show detail invoice"
         >
@@ -15,7 +15,7 @@
         <router-link
           class="btn p-2 bg-yellow-500 hover:bg-yellow-700"
           title="Edit invoice"
-          :to="`/edit/${this.invoice.id}`"
+          :to="`/edit/${this.invoice.invoiceNumber}`"
           :class="{ 'opacity-50 cursor-not-allowed': invoice.payStatus.done }"
           :event="invoice.payStatus.done ? '' : 'click'"
         >
@@ -30,6 +30,7 @@
           to="/"
           :class="{ 'opacity-50 cursor-not-allowed': invoice.payStatus.done }"
           :event="invoice.payStatus.done ? '' : 'click'"
+          @click="mailTo"
         >
           <Send :size="14" />
         </router-link>
@@ -51,6 +52,10 @@ export default {
       type: Object,
       required: true,
     },
+    index: {
+      type: Number,
+      required: true,
+    },
   },
   components: {
     Show,
@@ -59,12 +64,13 @@ export default {
     Send,
   },
   computed: {
-    showId() {
-      const position = this.invoice.id.search('_');
-      return this.invoice.id.slice(position + 1);
-    },
     getStatus() {
       return this.invoice.payStatus.done ? 'Paid' : 'Pending';
+    },
+  },
+  methods: {
+    mailTo() {
+      // on development!
     },
   },
 };

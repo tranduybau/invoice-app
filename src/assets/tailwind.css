@@ -20,7 +20,7 @@ a {
 	@apply outline-none;
 }
 
-.btn:disabled {
+*:disabled {
 	@apply cursor-not-allowed bg-gray-300 opacity-50;
 }
 
@@ -28,7 +28,7 @@ a {
 	@apply h-full w-full relative z-0;
 }
 
-.page-full-screen > div:first-child {
+.page-full-screen>div:first-child {
 	@apply text-xs text-gray-500 mb-4;
 }
 
