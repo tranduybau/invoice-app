@@ -28,7 +28,7 @@ router.beforeEach(async (to, from, next) => {
     next(`/login?redirect=${to.fullPath}`);
   } else if (!lodash.isEmpty(userInfo)) {
     switch (to.name) {
-      case 'Login' || 'Register' || 'ResetPassworda':
+      case 'Login' || 'Register' || 'ResetPassword':
         next({ path: '/' });
         break;
       case 'Home':
@@ -41,5 +41,4 @@ router.beforeEach(async (to, from, next) => {
   } else next();
 });
 
-router.afterEach(() => {
-});
+router.afterEach(() => {});

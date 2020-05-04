@@ -1,7 +1,5 @@
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
-// import axios from 'axios';
-// import lodash from '@/utils/lodash';
 import firebase from 'firebase';
 import { LOG_IN, LOG_OUT } from './constance.js';
 
@@ -26,10 +24,13 @@ const user = {
       const { email, password } = params;
       commit('utils/SET_LOADING', true, { root: true });
 
-      firebase.auth().signInWithEmailAndPassword(email, password)
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
         .then((result) => {
           commit('LOG_IN', result);
-        }).catch(() => {
+        })
+        .catch(() => {
           commit('utils/SET_ERROR', 'Wrong email or password!', { root: true });
         })
         .then(() => {

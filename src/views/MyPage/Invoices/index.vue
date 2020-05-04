@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <item v-for="(item, index) in listInvoices" :key="index" :invoice="item" />
+      <item v-for="(item, index) in listInvoices" :key="index" :index="index" :invoice="item" />
     </tbody>
   </table>
 </template>
@@ -28,8 +28,10 @@ export default {
   components: {
     Item,
   },
-  created() {
-    this.getListInvoices({ userId: this.userInfo.token });
+  async created() {
+    const { uid } = this.userInfo.user;
+    const startAt = 0;
+    await this.getListInvoices({ uid, startAt });
   },
   computed: {
     ...mapState('user', ['userInfo']),
