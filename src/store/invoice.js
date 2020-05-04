@@ -22,18 +22,19 @@ const invoice = {
     },
   },
   actions: {
-    async getListInvoices({ commit }, params) {
+    async getListInvoices({ commit, state }, params) {
       const db = firebase.firestore();
       const { uid, startAt } = params;
       const arrayList = [];
+      const lastObj = state.listInvoices[state.listInvoices.length - 1] || undefined;
 
       commit('utils/SET_LOADING', true, { root: true });
 
       db.collection('invoice')
         .where('uid', '==', uid)
         .orderBy('dateCreated', 'desc')
-        // .startAt(startAt)
-        // .limit(10)
+        // .startAfter(lastObj)
+        .limit(10)
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
