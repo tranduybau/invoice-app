@@ -10,6 +10,22 @@ const routes = [
     component: () => import('../views/Home'),
   },
   {
+    path: '/',
+    component: () => import('@/components/layout/SimpleLayout'),
+    children: [
+      {
+        path: 'login',
+        name: 'Login',
+        component: () => import('../views/Login'),
+      },
+      {
+        path: 'register',
+        name: 'Register',
+        component: () => import('../views/Register'),
+      },
+    ],
+  },
+  {
     path: '/my-page',
     name: 'My Invoices',
     component: () => import('../views/MyPage'),

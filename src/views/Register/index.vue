@@ -82,12 +82,6 @@ export default {
   methods: {
     ...mapActions('user', ['checkLogin', 'logout']),
     async handleGoBack() {
-      // const user = await firebase
-      //   .auth()
-      //   .signInWithEmailAndPassword('trdbau@gmail.com', 'bao123')
-      //   .catch((error) => error);
-
-      // console.log(user);
       this.$router.push('/');
     },
   },

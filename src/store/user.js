@@ -24,11 +24,11 @@ const user = {
       const { email, password } = params;
       commit('utils/SET_LOADING', true, { root: true });
 
-      firebase
+      await firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((result) => {
-          commit('LOG_IN', result);
+          commit('LOG_IN', result.user);
         })
         .catch(() => {
           commit('utils/SET_ERROR', 'Wrong email or password!', { root: true });
@@ -40,7 +40,23 @@ const user = {
           }, 0);
         });
     },
-    async logout({ commit }) {
+    async getInfoUser({ commit }) {
+      commit('utils/SET_LOADING', true, { root: true });
+
+      await firebase.auth().onAuthStateChanged((userInfo) => {
+        if (userInfo) {
+          commit('LOG_IN', userInfo);
+        } else {
+          commit('utils/SET_ERROR', 'Wrong email or password!', { root: true });
+        }
+      });
+
+      setTimeout(() => {
+        commit('utils/SET_LOADING', false, { root: true });
+        commit('utils/SET_ERROR', '', { root: true });
+      }, 0);
+    },
+    logout({ commit }) {
       commit('utils/SET_LOADING', true, { root: true });
       commit('LOG_OUT');
       setTimeout(() => {

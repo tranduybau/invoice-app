@@ -29,7 +29,7 @@ export default {
     Item,
   },
   async created() {
-    const { uid } = this.userInfo.user;
+    const { uid } = this.userInfo;
     const startAt = 0;
     await this.getListInvoices({ uid, startAt });
   },
