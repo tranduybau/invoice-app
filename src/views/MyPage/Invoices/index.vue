@@ -28,10 +28,9 @@ export default {
   components: {
     Item,
   },
-  async created() {
+  async mounted() {
     const { uid } = this.userInfo;
-    const startAt = 0;
-    await this.getListInvoices({ uid, startAt });
+    await this.getListInvoices({ uid });
   },
   computed: {
     ...mapState('user', ['userInfo']),

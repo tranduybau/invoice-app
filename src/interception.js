@@ -9,6 +9,7 @@ const handleInfoUser = async (to, from, next) => {
   if (lodash.isEmpty(userInfo)) {
     try {
       await store.dispatch('user/getInfoUser');
+      next();
     } catch (error) {
       router.push(`/login?redirect=${to.fullPath}`);
       Vue.notify({
@@ -26,8 +27,7 @@ router.beforeEach(async (to, from, next) => {
   const { userInfo } = store.getters;
 
   if (to.matched.some((record) => record.meta.requiresAuth) && lodash.isEmpty(userInfo)) {
-    await handleInfoUser(to, from, next);
-    next();
+    handleInfoUser(to, from, next);
   } else if (!lodash.isEmpty(userInfo)) {
     switch (to.name) {
       case 'Login' || 'Register' || 'ResetPassword':

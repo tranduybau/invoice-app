@@ -24,7 +24,7 @@ const invoice = {
   actions: {
     async getListInvoices({ commit }, params) {
       const db = firebase.firestore();
-      const { uid, startAt } = params;
+      const { uid } = params;
       const arrayList = [];
 
       commit('utils/SET_LOADING', true, { root: true });
@@ -32,8 +32,6 @@ const invoice = {
       db.collection('invoice')
         .where('uid', '==', uid)
         .orderBy('dateCreated', 'desc')
-        // .startAt(startAt)
-        // .limit(10)
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
