@@ -43,18 +43,22 @@ const user = {
     async getInfoUser({ commit }) {
       commit('utils/SET_LOADING', true, { root: true });
 
-      await firebase.auth().onAuthStateChanged((userInfo) => {
-        if (userInfo) {
-          commit('LOG_IN', userInfo);
-        } else {
-          commit('utils/SET_ERROR', 'Wrong email or password!', { root: true });
-        }
-      });
-
       setTimeout(() => {
         commit('utils/SET_LOADING', false, { root: true });
         commit('utils/SET_ERROR', '', { root: true });
       }, 0);
+
+      return new Promise((resolve, reject) => {
+        firebase.auth().onAuthStateChanged((userInfo) => {
+          if (userInfo) {
+            resolve(userInfo);
+            commit('LOG_IN', userInfo);
+          } else {
+            reject();
+            commit('utils/SET_ERROR', 'Wrong token', { root: true });
+          }
+        });
+      });
     },
     logout({ commit }) {
       commit('utils/SET_LOADING', true, { root: true });
