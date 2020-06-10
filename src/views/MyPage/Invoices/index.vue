@@ -30,6 +30,7 @@ export default {
   },
   async mounted() {
     const { uid } = this.userInfo;
+
     await this.getListInvoices({ uid });
   },
   computed: {
