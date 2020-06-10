@@ -28,10 +28,10 @@ export default {
   components: {
     Item,
   },
-  async created() {
-    const { uid } = this.userInfo.user;
-    const startAt = 0;
-    await this.getListInvoices({ uid, startAt });
+  async mounted() {
+    const { uid } = this.userInfo;
+
+    await this.getListInvoices({ uid });
   },
   computed: {
     ...mapState('user', ['userInfo']),

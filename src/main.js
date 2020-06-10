@@ -8,7 +8,6 @@ import './registerServiceWorker';
 import './assets/tailwind.css';
 import '@/interception';
 
-// function: Use firebase:
 const config = {
   apiKey: 'AIzaSyApiiF3U_eR1SrxIvIRx6MTGfLmG7wO1-g',
   authDomain: 'bauer-web-blog.firebaseapp.com',

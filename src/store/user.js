@@ -1,6 +1,6 @@
-/* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 import firebase from 'firebase';
+import Services from '@/Services';
 import { LOG_IN, LOG_OUT } from './constance.js';
 
 const user = {
@@ -24,11 +24,11 @@ const user = {
       const { email, password } = params;
       commit('utils/SET_LOADING', true, { root: true });
 
-      firebase
+      await firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((result) => {
-          commit('LOG_IN', result);
+          commit('LOG_IN', result.user);
         })
         .catch(() => {
           commit('utils/SET_ERROR', 'Wrong email or password!', { root: true });
@@ -40,7 +40,19 @@ const user = {
           }, 0);
         });
     },
-    async logout({ commit }) {
+    async getInfoUser({ commit }) {
+      commit('utils/SET_LOADING', true, { root: true });
+      const info = await Services.getInfo();
+
+      if (info.uid) commit('LOG_IN', info);
+      else commit('utils/SET_ERROR', 'Wrong token', { root: true });
+
+      setTimeout(() => {
+        commit('utils/SET_LOADING', false, { root: true });
+        commit('utils/SET_ERROR', '', { root: true });
+      }, 0);
+    },
+    logout({ commit }) {
       commit('utils/SET_LOADING', true, { root: true });
       commit('LOG_OUT');
       setTimeout(() => {
